@@ -52,6 +52,8 @@ flowchart LR
 - Legally compliant by construction: every send carries a working, cryptographically-verified unsubscribe path, honored automatically with no manual step in the loop.
 - Isolated from the always-on pipeline deliberately — a failure or a rate-limit event in this system can't cascade into the primary signal-ingestion pipeline, because they don't share infrastructure beyond the orchestration platform itself.
 
+The n8n orchestration layer tying these stages together (ingest, nightly enrichment, gated send, event tracking) is published, sanitized, at [`revenue-systems-lab/white-label-outreach-orchestration`](https://github.com/abbassaeedza/revenue-systems-lab/tree/main/white-label-outreach-orchestration) - the scraper and edge worker described above stay off GitHub since they're Node.js scripts tied more directly to the target directory's structure, but the n8n side is real, published code.
+
 ## Tech stack
 
 Node.js · Browser automation (scraping) · A contact-enrichment API · A transactional email API · Cloudflare Workers (edge unsubscribe/reply handling) · n8n (scheduling/orchestration layer)

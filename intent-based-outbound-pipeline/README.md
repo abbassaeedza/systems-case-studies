@@ -25,7 +25,7 @@ Cold outreach at volume has a quality ceiling: a purchased list of "companies th
 
 ```mermaid
 flowchart LR
-    subgraph Sources["11 independent signal sources"]
+    subgraph Sources["10 independent signal sources"]
         A[Job-posting boards]
         B[Government filings]
         C[Social/competitor engagement]
@@ -44,11 +44,13 @@ flowchart LR
 
 ## What I built
 
-- **11 independent signal-source integrations**, each normalizing into a shared `signals` / `companies` / `job_postings` schema so scoring doesn't care which source a lead came from.
+- **10 independent signal-source integrations**, each normalizing into a shared `signals` / `companies` / `job_postings` schema so scoring doesn't care which source a lead came from.
 - **A intent-scoring layer** that gates which companies are worth spending contact-resolution budget on, instead of enriching everything that comes in.
 - **A two-tier contact-resolution waterfall** (a primary provider, falling back to a second, cheaper provider that costs nothing on a miss) — tuned specifically so the pipeline never pays twice to learn the same "no data" answer.
 - **A shared error-handler workflow**: every other workflow in the system reports failures through one small, dedicated pattern — trigger → build an error payload → alert — rather than each workflow rolling its own error handling.
 - **State shared through the database, not workflow-to-workflow calls** — every source-ingestion workflow writes to the same tables and reads nothing from each other directly, which made it possible to add/remove sources without touching unrelated workflows.
+
+The hiring source has a complete, documented path all the way to a resolved contact - see [`revenue-systems-lab/hiring-signal-pipeline`](https://github.com/abbassaeedza/revenue-systems-lab/tree/main/hiring-signal-pipeline) for the real, sanitized 5-workflow chain (discovery → daily ATS poll → staleness recheck → DB-side scoring → two-tier contact resolution), including the actual production bug this chain's schedule ordering fixed.
 
 ## Technical decisions
 
@@ -94,4 +96,4 @@ n8n (workflow orchestration) · PostgreSQL via PostgREST (HTTPS-only data layer)
 
 ## What this proves
 
-I can take a genuinely ambiguous "find better leads" problem, decompose it into independently-failing pieces (11 sources, a scoring gate, a resolution waterfall), and debug a production automation platform at the level of "the tool's own success report is not the ground truth" — using raw execution data and schema diffs instead of trusting a UI. That's the same skill whether the target is a marketing automation platform or a distributed backend service.
+I can take a genuinely ambiguous "find better leads" problem, decompose it into independently-failing pieces (10 sources, a scoring gate, a resolution waterfall), and debug a production automation platform at the level of "the tool's own success report is not the ground truth" — using raw execution data and schema diffs instead of trusting a UI. That's the same skill whether the target is a marketing automation platform or a distributed backend service.

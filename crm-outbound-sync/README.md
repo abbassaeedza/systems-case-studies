@@ -58,6 +58,8 @@ flowchart LR
 
 Deliverability, sender-domain, and reply-rate figures for the outbound sequences this feeds are the same numbers documented in the [Intent-Based Outbound Pipeline](../intent-based-outbound-pipeline/) case study — this router is a feeder into the same sending infrastructure, not a separately-measured system.
 
+The real, sanitized workflow this case study describes is published at [`revenue-systems-lab/crm-outbound-sync`](https://github.com/abbassaeedza/revenue-systems-lab/tree/main/crm-outbound-sync) — not a reconstruction, the actual node graph and business rules (disqualification keywords, the scoring formula, segment definitions) with credentials and identifiers replaced.
+
 ## Tech stack
 
 n8n (orchestration) · A visitor de-anonymization data source · A contact-enrichment API · A CRM/outbound sending platform · Weighted scoring logic in code
