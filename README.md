@@ -6,8 +6,10 @@ Sanitized architecture write-ups of production revenue/GTM and AI-systems work I
 
 | System | What it does | Stack highlights |
 |---|---|---|
-| [Intent-Based Multi-Source Outbound Pipeline](./intent-based-outbound-pipeline/) | Scores companies on buying intent across 11 independent signal sources before spending enrichment budget on them | n8n, PostgREST, multi-source scraping, contact-resolution waterfall |
-| [Closed-Loop CRM ↔ Outbound Sync](./crm-outbound-sync/) | Routes de-anonymized website visitors into the right outbound sequence via a two-factor intent × fit score | n8n, visitor de-anonymization, weighted scoring |
+| [Intent-Based Multi-Source Outbound Pipeline](./intent-based-outbound-pipeline/) | Scores companies on buying intent across 10 independent signal sources before spending enrichment budget on them | n8n, PostgREST, multi-source scraping, contact-resolution waterfall |
+| [CRM Outbound Sync](./crm-outbound-sync/) | Bidirectional sync between CRM lead-qualification events and an outbound platform - reply events write back to CRM automatically | n8n, CRM webhook + REST API, LLM reply classification |
+| [RB2B ICP Router](./rb2b-icp-router/) | Routes de-anonymized website visitors into the right outbound sequence via a two-factor intent x fit score | n8n, visitor de-anonymization, weighted scoring |
+| [Guest-Post Prospecting Pipeline](./guest-post-prospecting-pipeline/) | Search-discovery fan-out, two-tier email resolution, verify-then-send with dual-mailbox rotation | n8n, SERP API, NeverBounce, LLM-personalized outreach |
 | [White-Label Outreach Pipeline](./white-label-outreach-pipeline/) | Resumable scraper + enrichment + compliant cold-send pipeline with cryptographically-verified unsubscribe | Node.js, Cloudflare Workers, HMAC tokens |
 | [Multi-Source Lead Sourcing & Enrichment Engine](./multi-source-lead-enrichment-engine/) | From-scratch Python system scraping 9 sources and resolving contacts through a 6-provider enrichment waterfall | Python, Postgres, anti-detection fetching, pytest |
 | [RevFlow Client Systems](./revflow-client-systems/) | Independent consulting: CRM + automation infrastructure for local-service businesses, real named clients | GoHighLevel, voice agents, ad-platform integrations |
